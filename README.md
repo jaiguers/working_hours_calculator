@@ -15,7 +15,7 @@ ___
 - Servicio REST que recibe la petición y retorna el reporte de horas del técnico.
 - Lógica de negocio necesaria para hacer el cálculo de horas.
                     
-###Modulos de la plataforma
+### Modulos de la plataforma
 
 | Nombre | Descripción                   |
 | ------------- | ------------------------------ |
