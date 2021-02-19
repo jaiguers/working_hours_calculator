@@ -1,4 +1,4 @@
-﻿using Abbott.CrossCutting.ApplicationModel;
+﻿using IASHandyMan.CrossCutting.ApplicationModel;
 using AutoMapper;
 using AutoMapper.Extensions.ExpressionMapping;
 using Domain.Business.Interface;

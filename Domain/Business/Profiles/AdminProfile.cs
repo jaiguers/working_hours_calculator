@@ -3,7 +3,7 @@ using AutoMapper;
 using System.Collections.Generic;
 using System.Text;
 using Domain.Models;
-using Abbott.CrossCutting.ApplicationModel;
+using IASHandyMan.CrossCutting.ApplicationModel;
 
 namespace Domain.Business.Profiles
 {
