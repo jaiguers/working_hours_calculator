@@ -36,7 +36,6 @@
     <Folder Include="Areas\Reviews\Models\" />
     <Folder Include="Areas\Technician\Data\" />
     <Folder Include="Areas\Technician\Models\" />
-    <Folder Include="Areas\Technician\Views\" />
     <Folder Include="Data\Migrations\" />
     <Folder Include="wwwroot\pdf\" />
   </ItemGroup>

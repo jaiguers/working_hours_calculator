@@ -29,8 +29,15 @@ namespace IASHandyMan.Areas.Technician.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = RolesEnum.TECH)]
+        [Authorize(Roles = RolesEnum.TECH + "," + RolesEnum.ADMIN)]
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [Authorize(Roles = RolesEnum.TECH)]
+        public IActionResult RegisterHours()
         {
             return View();
         }
