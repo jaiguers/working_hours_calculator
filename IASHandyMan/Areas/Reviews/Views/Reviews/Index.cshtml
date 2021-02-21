@@ -1,4 +1,4 @@
-﻿@model IASHandyMan.Areas.Providers.Models.DocVM
+﻿
 @{
     Layout = "_Layout";
     ViewData["Title"] = "Index";
@@ -45,43 +45,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (Model.ListDocs != null && Model.ListDocs.Count > 0)
-                                    {
-                                        foreach (var item in Model.ListDocs)
-                                        {
-                                            <tr>
-                                                <td>@item.Name</td>
-                                                <td>
-                                                    @item.DocumentType.Name
-                                                </td>
-                                                <td>
-                                                    @item.RegistrationDate.ToString("dd/mm/yyyy")
-                                                </td>
-                                                <td>
-                                                    @if (item.IdState == 3)
-                                                    {
-                                                        <span class="badge bg-success">Aprobado</span>
-                                                    }
-                                                    else@if (item.IdState == 4)
-                                                    {
-                                                        <span class="badge bg-danger">Rechazado</span>
-                                                    }
-                                                    else@if (item.IdState == 5)
-                                                    {
-                                                        <span class="badge bg-warning">Revisión</span>
-                                                    }
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-primary btn-sm" onclick="getDoc(@item.Id)">
-                                                        <i class="fas fa-folder">
-                                                        </i>
-                                                        Ver
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        }
-                                    }
-
+                                    
                                 </tbody>
                             </table>
                         </div>

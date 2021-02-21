@@ -17,7 +17,7 @@ namespace IASHandyMan.CrossCutting.Enumerators
         /// <summary>
         /// Rol proveedor
         /// </summary>
-        public const string PROVIDERS = "Proveedor";
+        public const string TECH = "Tecnico";
 
         /// <summary>
         /// Rol Supervisor

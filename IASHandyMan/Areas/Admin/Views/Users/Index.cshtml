@@ -1,5 +1,4 @@
-﻿@model IASHandyMan.Areas.Providers.Models.DocVM
-
+﻿
 @{
     Layout = "_Layout";
     ViewData["Title"] = "Index";
@@ -46,45 +45,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (ViewBag.usersData != null && ViewBag.usersData.Count > 0)
-                                    {
-                                        foreach (var item in ViewBag.usersData)
-                                        {
-                                            <tr>
-                                                <td>@(item.Person.Name+" "+item.Person.Surname)</td>
-                                                <td>
-                                                    @item.Email
-                                                </td>
-                                                <td>
-                                                    @foreach (var subItem in item.UsersRoles)
-                                                    {
-                                                        @subItem.Role.Name
-                                                    }
-                                                </td>
-                                                <td>
-                                                    @if (item.IdState == 1)
-                                                    {
-                                                        <span class="badge bg-success">Activo</span>
-                                                    }
-                                                    else@if (item.IdState == 4)
-                                                    {
-                                                        <span class="badge bg-danger">Rechazado</span>
-                                                    }
-                                                    else@if (item.IdState == 5)
-                                                    {
-                                                        <span class="badge bg-warning">Revisión</span>
-                                                    }
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-primary btn-sm" onclick="getDoc(@item.Id)">
-                                                        <i class="fas fa-plus">
-                                                        </i>
-                                                        Asignar rol
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        }
-                                    }
+                                    
 
                                 </tbody>
                             </table>
