@@ -32,18 +32,18 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Crear registro de Sancion
+        /// Crear registro de person
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
         public long Create(PersonAM entity)
         {
             try
             {
-                var sancion = mapper.Map<Person>(entity);
+                var person = mapper.Map<Person>(entity);
 
                 IRepository<Person> repo = new PersonRepo(context);
-                return repo.Create(sancion);
+                return repo.Create(person);
             }
             catch (Exception ex)
             {
@@ -52,9 +52,9 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener cantidad de registros de Sancion
+        /// Obtener cantidad de registros de person
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
         public int Count()
         {
@@ -70,9 +70,9 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener cantidad de registros de Sancion según filtro
+        /// Obtener cantidad de registros de person según filtro
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
         public int Count(Expression<Func<PersonAM, bool>> predicate)
         {
@@ -90,18 +90,18 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener Sancion por Id
+        /// Obtener person por Id
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
         public PersonAM Get(long id)
         {
             try
             {
                 IRepository<Person> repo = new PersonRepo(context);
-                var sancion = repo.Get(id);
+                var person = repo.Get(id);
 
-                return mapper.Map<PersonAM>(sancion);
+                return mapper.Map<PersonAM>(person);
             }
             catch (Exception ex)
             {
@@ -110,18 +110,18 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener lista de Sancion
+        /// Obtener lista de person
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
         public List<PersonAM> Get()
         {
             try
             {
                 IRepository<Person> repo = new PersonRepo(context);
-                var sancion = repo.Get();
+                var person = repo.Get();
 
-                return mapper.Map<List<PersonAM>>(sancion);
+                return mapper.Map<List<PersonAM>>(person);
             }
             catch (Exception ex)
             {
@@ -130,9 +130,9 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener lista de Sancion
+        /// Obtener lista de person
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
         public List<PersonAM> Get(Expression<Func<PersonAM, bool>> predicate)
         {
@@ -141,9 +141,9 @@ namespace Domain.Business.BO
                 var where = mapper.MapExpression<Expression<Func<Person, bool>>>(predicate);
 
                 IRepository<Person> repo = new PersonRepo(context);
-                var sancion = repo.Get(where);
+                var person = repo.Get(where);
 
-                return mapper.Map<List<PersonAM>>(sancion);
+                return mapper.Map<List<PersonAM>>(person);
             }
             catch (Exception ex)
             {
@@ -152,9 +152,9 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener primera Sancion según filtro
+        /// Obtener primera persons según filtro
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
         public PersonAM GetFirst(Expression<Func<PersonAM, bool>> predicate)
         {
@@ -163,9 +163,9 @@ namespace Domain.Business.BO
                 var where = mapper.MapExpression<Expression<Func<Person, bool>>>(predicate);
 
                 IRepository<Person> repo = new PersonRepo(context);
-                var sancion = repo.GetFirst(where);
+                var person = repo.GetFirst(where);
 
-                return mapper.Map<PersonAM>(sancion);
+                return mapper.Map<PersonAM>(person);
             }
             catch (Exception ex)
             {
@@ -174,18 +174,18 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Actualizar Sancion
+        /// Actualizar person
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
         public void Update(PersonAM entity)
         {
             try
             {
-                var sancion = mapper.Map<Person>(entity);
+                var person = mapper.Map<Person>(entity);
 
                 IRepository<Person> repo = new PersonRepo(context);
-                repo.Update(sancion);
+                repo.Update(person);
             }
             catch (Exception ex)
             {

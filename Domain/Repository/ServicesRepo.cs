@@ -1,7 +1,6 @@
 ﻿using Domain.Context;
 using Domain.Models;
 using Domain.Repository.Base;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +8,9 @@ using System.Linq.Expressions;
 
 namespace Domain.Repository
 {
-    public class DocumentRepo : BaseRepository<Documents>
+    public class ServicesRepo : BaseRepository<Services>
     {
-        public DocumentRepo(DomainContext context) : base(context)
+        public ServicesRepo(DomainContext context) : base(context)
         {
         }
 
@@ -19,7 +18,7 @@ namespace Domain.Repository
         {
             try
             {
-                return context.Document.Count();
+                return context.Services.Count();
             }
             catch (Exception ex)
             {
@@ -27,11 +26,11 @@ namespace Domain.Repository
             }
         }
 
-        public override int Count(Expression<Func<Documents, bool>> predicate)
+        public override int Count(Expression<Func<Services, bool>> predicate)
         {
             try
             {
-                return context.Document.Count(predicate);
+                return context.Services.Count(predicate);
             }
             catch (Exception ex)
             {
@@ -39,11 +38,11 @@ namespace Domain.Repository
             }
         }
 
-        public override long Create(Documents entity)
+        public override long Create(Services entity)
         {
             try
             {
-                context.Document.Add(entity);
+                context.Services.Add(entity);
                 context.SaveChanges();
 
                 return entity.Id;
@@ -54,11 +53,11 @@ namespace Domain.Repository
             }
         }
 
-        public override Documents Get(long id)
+        public override Services Get(long id)
         {
             try
             {
-                return context.Document.Where(j => j.Id == id).FirstOrDefault();
+                return context.Services.Where(j => j.Id == id).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -66,11 +65,11 @@ namespace Domain.Repository
             }
         }
 
-        public override ICollection<Documents> Get()
+        public override ICollection<Services> Get()
         {
             try
             {
-                return context.Document.Include(j => j.DocumentType).ToList();
+                return context.Services.ToList();
             }
             catch (Exception ex)
             {
@@ -78,11 +77,11 @@ namespace Domain.Repository
             }
         }
 
-        public override ICollection<Documents> Get(Expression<Func<Documents, bool>> predicate)
+        public override ICollection<Services> Get(Expression<Func<Services, bool>> predicate)
         {
             try
             {
-                return context.Document.Include(j => j.DocumentType).Where(predicate).ToList();
+                return context.Services.Where(predicate).ToList();
             }
             catch (Exception ex)
             {
@@ -90,17 +89,17 @@ namespace Domain.Repository
             }
         }
 
-        public override ICollection<Documents> Get(Expression<Func<Documents, bool>> predicate, int page, int size, Func<Documents, object> filterAttribute, bool descending)
+        public override ICollection<Services> Get(Expression<Func<Services, bool>> predicate, int page, int size, Func<Services, object> filterAttribute, bool descending)
         {
-            return descending ? context.Document.Where(predicate).Skip(page).Take(size).OrderByDescending(filterAttribute).ToList()
-               : context.Document.Where(predicate).Skip(page).Take(size).OrderBy(filterAttribute).ToList();
+            return descending ? context.Services.Where(predicate).Skip(page).Take(size).OrderByDescending(filterAttribute).ToList()
+               : context.Services.Where(predicate).Skip(page).Take(size).OrderBy(filterAttribute).ToList();
         }
 
-        public override Documents GetFirst(Expression<Func<Documents, bool>> predicate)
+        public override Services GetFirst(Expression<Func<Services, bool>> predicate)
         {
             try
             {
-                return context.Document.FirstOrDefault(predicate);
+                return context.Services.FirstOrDefault(predicate);
             }
             catch (Exception ex)
             {
@@ -108,19 +107,16 @@ namespace Domain.Repository
             }
         }
 
-        public override void Update(Documents entity)
+        public override void Update(Services entity)
         {
             try
             {
-                foreach (var _entity in context.ChangeTracker.Entries())
-                    _entity.State = EntityState.Detached;
-
-                context.Document.Update(entity);
+                context.Services.Update(entity);
                 context.SaveChanges();
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ex.InnerException?.Message);
+                throw new Exception(ex.Message, ex.InnerException);
             }
         }
     }

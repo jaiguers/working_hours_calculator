@@ -32,18 +32,18 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Crear registro de Sancion
+        /// Crear registro de menu
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-08-06
+        /// Fecha: 2021-02-20
         /// </summary>
         public long Create(MenuAM entity)
         {
             try
             {
-                var sancion = mapper.Map<Menu>(entity);
+                var menu = mapper.Map<Menu>(entity);
 
                 IRepository<Menu> repo = new MenuRepo(context);
-                return repo.Create(sancion);
+                return repo.Create(menu);
             }
             catch (Exception ex)
             {
@@ -52,9 +52,9 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener cantidad de registros de Sancion
+        /// Obtener cantidad de registros de menu
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-08-06
+        /// Fecha: 2021-02-20
         /// </summary>
         public int Count()
         {
@@ -70,9 +70,9 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener cantidad de registros de Sancion según filtro
+        /// Obtener cantidad de registros de menu según filtro
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-08-06
+        /// Fecha: 2021-02-20
         /// </summary>
         public int Count(Expression<Func<MenuAM, bool>> predicate)
         {
@@ -90,18 +90,18 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener Sancion por Id
+        /// Obtener menu por Id
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-08-06
+        /// Fecha: 2021-02-20
         /// </summary>
         public MenuAM Get(long id)
         {
             try
             {
                 IRepository<Menu> repo = new MenuRepo(context);
-                var sancion = repo.Get(id);
+                var menu = repo.Get(id);
 
-                return mapper.Map<MenuAM>(sancion);
+                return mapper.Map<MenuAM>(menu);
             }
             catch (Exception ex)
             {
@@ -110,18 +110,18 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener lista de Sancion
+        /// Obtener lista de menu
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-08-06
+        /// Fecha: 2021-02-20
         /// </summary>
         public List<MenuAM> Get()
         {
             try
             {
                 IRepository<Menu> repo = new MenuRepo(context);
-                var sancion = repo.Get();
+                var menu = repo.Get();
 
-                return mapper.Map<List<MenuAM>>(sancion);
+                return mapper.Map<List<MenuAM>>(menu);
             }
             catch (Exception ex)
             {
@@ -130,9 +130,9 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener lista de Sancion
+        /// Obtener lista de menu
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-08-06
+        /// Fecha: 2021-02-20
         /// </summary>
         public List<MenuAM> Get(Expression<Func<MenuAM, bool>> predicate)
         {
@@ -141,9 +141,9 @@ namespace Domain.Business.BO
                 var where = mapper.MapExpression<Expression<Func<Menu, bool>>>(predicate);
 
                 IRepository<Menu> repo = new MenuRepo(context);
-                var sancion = repo.Get(where);
+                var menu = repo.Get(where);
 
-                return mapper.Map<List<MenuAM>>(sancion);
+                return mapper.Map<List<MenuAM>>(menu);
             }
             catch (Exception ex)
             {
@@ -152,9 +152,9 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener primera Sancion según filtro
+        /// Obtener primera menu según filtro
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-08-06
+        /// Fecha: 2021-02-20
         /// </summary>
         public MenuAM GetFirst(Expression<Func<MenuAM, bool>> predicate)
         {
@@ -163,9 +163,9 @@ namespace Domain.Business.BO
                 var where = mapper.MapExpression<Expression<Func<Menu, bool>>>(predicate);
 
                 IRepository<Menu> repo = new MenuRepo(context);
-                var sancion = repo.GetFirst(where);
+                var menu = repo.GetFirst(where);
 
-                return mapper.Map<MenuAM>(sancion);
+                return mapper.Map<MenuAM>(menu);
             }
             catch (Exception ex)
             {
@@ -174,18 +174,18 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Actualizar Sancion
+        /// Actualizar menu
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-08-06
+        /// Fecha: 2021-02-20
         /// </summary>
         public void Update(MenuAM entity)
         {
             try
             {
-                var sancion = mapper.Map<Menu>(entity);
+                var menu = mapper.Map<Menu>(entity);
 
                 IRepository<Menu> repo = new MenuRepo(context);
-                repo.Update(sancion);
+                repo.Update(menu);
             }
             catch (Exception ex)
             {

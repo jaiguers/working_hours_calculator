@@ -4,10 +4,10 @@ using System.Text;
 
 namespace IASHandyMan.CrossCutting.ApplicationModel
 {
-    public class DocumentTypeAM
+    public class ServicesAM
     {
         public long Id { get; set; }
-        public string Name { get; set; }
-        public string Code { get; set; }
+        public string Names { get; set; }
+        public string Identification { get; set; }
     }
 }

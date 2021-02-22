@@ -8,9 +8,9 @@ using System.Linq.Expressions;
 
 namespace Domain.Repository
 {
-    public class CityRepo : BaseRepository<City>
+    public class PersonServicesRepo : BaseRepository<PersonServices>
     {
-        public CityRepo(DomainContext context) : base(context)
+        public PersonServicesRepo(DomainContext context) : base(context)
         {
         }
 
@@ -18,7 +18,7 @@ namespace Domain.Repository
         {
             try
             {
-                return context.City.Count();
+                return context.PersonServices.Count();
             }
             catch (Exception ex)
             {
@@ -26,11 +26,11 @@ namespace Domain.Repository
             }
         }
 
-        public override int Count(Expression<Func<City, bool>> predicate)
+        public override int Count(Expression<Func<PersonServices, bool>> predicate)
         {
             try
             {
-                return context.City.Count(predicate);
+                return context.PersonServices.Count(predicate);
             }
             catch (Exception ex)
             {
@@ -38,11 +38,11 @@ namespace Domain.Repository
             }
         }
 
-        public override long Create(City entity)
+        public override long Create(PersonServices entity)
         {
             try
             {
-                context.City.Add(entity);
+                context.PersonServices.Add(entity);
                 context.SaveChanges();
 
                 return entity.Id;
@@ -53,11 +53,11 @@ namespace Domain.Repository
             }
         }
 
-        public override City Get(long id)
+        public override PersonServices Get(long id)
         {
             try
             {
-                return context.City.Where(j => j.Id == id).FirstOrDefault();
+                return context.PersonServices.Where(j => j.Id == id).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -65,11 +65,11 @@ namespace Domain.Repository
             }
         }
 
-        public override ICollection<City> Get()
+        public override ICollection<PersonServices> Get()
         {
             try
             {
-                return context.City.ToList();
+                return context.PersonServices.ToList();
             }
             catch (Exception ex)
             {
@@ -77,11 +77,11 @@ namespace Domain.Repository
             }
         }
 
-        public override ICollection<City> Get(Expression<Func<City, bool>> predicate)
+        public override ICollection<PersonServices> Get(Expression<Func<PersonServices, bool>> predicate)
         {
             try
             {
-                return context.City.Where(predicate).ToList();
+                return context.PersonServices.Where(predicate).ToList();
             }
             catch (Exception ex)
             {
@@ -89,17 +89,17 @@ namespace Domain.Repository
             }
         }
 
-        public override ICollection<City> Get(Expression<Func<City, bool>> predicate, int page, int size, Func<City, object> filterAttribute, bool descending)
+        public override ICollection<PersonServices> Get(Expression<Func<PersonServices, bool>> predicate, int page, int size, Func<PersonServices, object> filterAttribute, bool descending)
         {
-            return descending ? context.City.Where(predicate).Skip(page).Take(size).OrderByDescending(filterAttribute).ToList()
-               : context.City.Where(predicate).Skip(page).Take(size).OrderBy(filterAttribute).ToList();
+            return descending ? context.PersonServices.Where(predicate).Skip(page).Take(size).OrderByDescending(filterAttribute).ToList()
+               : context.PersonServices.Where(predicate).Skip(page).Take(size).OrderBy(filterAttribute).ToList();
         }
 
-        public override City GetFirst(Expression<Func<City, bool>> predicate)
+        public override PersonServices GetFirst(Expression<Func<PersonServices, bool>> predicate)
         {
             try
             {
-                return context.City.FirstOrDefault(predicate);
+                return context.PersonServices.FirstOrDefault(predicate);
             }
             catch (Exception ex)
             {
@@ -107,11 +107,11 @@ namespace Domain.Repository
             }
         }
 
-        public override void Update(City entity)
+        public override void Update(PersonServices entity)
         {
             try
             {
-                context.City.Update(entity);
+                context.PersonServices.Update(entity);
                 context.SaveChanges();
             }
             catch (Exception ex)

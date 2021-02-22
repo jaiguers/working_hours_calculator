@@ -22,14 +22,10 @@ namespace IASHandyMan.Areas.Register.Controllers
         private readonly SignInManager<Users> singInManager;
         private readonly RoleManager<Role> roleManager;
         private readonly UserManager<Users> userManager;
-        private readonly IIdentificationType IdTypeBO;
-        private readonly IDepartment departmentBO;
         private readonly IPerson personBO;
 
         public RegistersController(DomainContext context, ILogger<RegistersController> log, UserManager<Users> userManag, SignInManager<Users> signInManag, RoleManager<Role> roleManag)
         {
-            IdTypeBO = new IdentificationTypeBO(context);
-            departmentBO = new DepartmentBO(context);
             personBO = new PersonBO(context);
             singInManager = signInManag;
             roleManager = roleManag;
@@ -40,7 +36,6 @@ namespace IASHandyMan.Areas.Register.Controllers
         public IActionResult Index()
         {
             RegisterVM model = new RegisterVM();
-            LoadInfo();
 
             return View(model);
         }
@@ -48,8 +43,6 @@ namespace IASHandyMan.Areas.Register.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(RegisterVM model)
         {
-            LoadInfo();
-
             try
             {
                 if (ModelState.IsValid)
@@ -94,7 +87,6 @@ namespace IASHandyMan.Areas.Register.Controllers
         public IActionResult Internal()
         {
             InternalVM model = new InternalVM();
-            LoadInfo();
 
             return View(model);
         }
@@ -142,24 +134,5 @@ namespace IASHandyMan.Areas.Register.Controllers
 
         }
 
-        private void LoadInfo()
-        {
-            try
-            {
-                var depart = departmentBO.Get();
-
-                ViewBag.ListIdType = new SelectList(IdTypeBO.Get(), "Id", "Name");
-                ViewBag.ListDepartment = new SelectList(depart, "Id", "Name");
-                ViewBag.ListCities = new SelectList(new List<CityAM>(), "Id", "Name");
-                ViewBag.ListDep = new SelectList(depart, "Id", "Name");
-                ViewBag.ListCity = new SelectList(new List<CityAM>(), "Id", "Name");
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex, ex.Message + " - Register/Register/LoadInfo");
-            }
-
-
-        }
     }
 }

@@ -33,18 +33,18 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Crear registro de Sancion
+        /// Crear registro de states
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
         public long Create(StatesAM entity)
         {
             try
             {
-                var sancion = mapper.Map<States>(entity);
+                var states = mapper.Map<States>(entity);
 
                 IRepository<States> repo = new StatesRepo(context);
-                return repo.Create(sancion);
+                return repo.Create(states);
             }
             catch (Exception ex)
             {
@@ -53,9 +53,9 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener cantidad de registros de Sancion
+        /// Obtener cantidad de registros de states
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
         public int Count()
         {
@@ -71,9 +71,9 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener cantidad de registros de Sancion según filtro
+        /// Obtener cantidad de registros de states según filtro
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
         public int Count(Expression<Func<StatesAM, bool>> predicate)
         {
@@ -91,18 +91,18 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener Sancion por Id
+        /// Obtener states por Id
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
         public StatesAM Get(long id)
         {
             try
             {
                 IRepository<States> repo = new StatesRepo(context);
-                var sancion = repo.Get(id);
+                var states = repo.Get(id);
 
-                return mapper.Map<StatesAM>(sancion);
+                return mapper.Map<StatesAM>(states);
             }
             catch (Exception ex)
             {
@@ -111,18 +111,18 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener lista de Sancion
+        /// Obtener lista de states
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
         public List<StatesAM> Get()
         {
             try
             {
                 IRepository<States> repo = new StatesRepo(context);
-                var sancion = repo.Get();
+                var states = repo.Get();
 
-                return mapper.Map<List<StatesAM>>(sancion);
+                return mapper.Map<List<StatesAM>>(states);
             }
             catch (Exception ex)
             {
@@ -131,9 +131,9 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener lista de Sancion
+        /// Obtener lista de states
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
         public List<StatesAM> Get(Expression<Func<StatesAM, bool>> predicate)
         {
@@ -142,9 +142,9 @@ namespace Domain.Business.BO
                 var where = mapper.MapExpression<Expression<Func<States, bool>>>(predicate);
 
                 IRepository<States> repo = new StatesRepo(context);
-                var sancion = repo.Get(where);
+                var states = repo.Get(where);
 
-                return mapper.Map<List<StatesAM>>(sancion);
+                return mapper.Map<List<StatesAM>>(states);
             }
             catch (Exception ex)
             {
@@ -153,9 +153,9 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener primera Sancion según filtro
+        /// Obtener primera states según filtro
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
         public StatesAM GetFirst(Expression<Func<StatesAM, bool>> predicate)
         {
@@ -164,9 +164,9 @@ namespace Domain.Business.BO
                 var where = mapper.MapExpression<Expression<Func<States, bool>>>(predicate);
 
                 IRepository<States> repo = new StatesRepo(context);
-                var sancion = repo.GetFirst(where);
+                var states = repo.GetFirst(where);
 
-                return mapper.Map<StatesAM>(sancion);
+                return mapper.Map<StatesAM>(states);
             }
             catch (Exception ex)
             {
@@ -175,18 +175,18 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Actualizar Sancion
+        /// Actualizar states
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
         public void Update(StatesAM entity)
         {
             try
             {
-                var sancion = mapper.Map<States>(entity);
+                var states = mapper.Map<States>(entity);
 
                 IRepository<States> repo = new StatesRepo(context);
-                repo.Update(sancion);
+                repo.Update(states);
             }
             catch (Exception ex)
             {

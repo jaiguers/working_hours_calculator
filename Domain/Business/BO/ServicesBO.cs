@@ -10,16 +10,15 @@ using Domain.Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Domain.Business.BO
 {
-    public class DepartmentBO : IDepartment
+    public class ServicesBO : IServices
     {
         private readonly DomainContext context;
         private readonly IMapper mapper;
 
-        public DepartmentBO(DomainContext context)
+        public ServicesBO(DomainContext context)
         {
             this.context = context;
 
@@ -33,18 +32,18 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Crear registro de Sancion
+        /// Crear registro de services
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-08-06
+        /// Fecha: 2021-02-20
         /// </summary>
-        public long Create(DepartmentAM entity)
+        public long Create(ServicesAM entity)
         {
             try
             {
-                var sancion = mapper.Map<Department>(entity);
+                var services = mapper.Map<Services>(entity);
 
-                IRepository<Department> repo = new DepartmentRepo(context);
-                return repo.Create(sancion);
+                IRepository<Services> repo = new ServicesRepo(context);
+                return repo.Create(services);
             }
             catch (Exception ex)
             {
@@ -53,15 +52,15 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener cantidad de registros de Sancion
+        /// Obtener cantidad de registros de services
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-08-06
+        /// Fecha: 2021-02-20
         /// </summary>
         public int Count()
         {
             try
             {
-                IRepository<Department> repo = new DepartmentRepo(context);
+                IRepository<Services> repo = new ServicesRepo(context);
                 return repo.Count();
             }
             catch (Exception ex)
@@ -71,17 +70,17 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener cantidad de registros de Sancion según filtro
+        /// Obtener cantidad de registros de services según filtro
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-08-06
+        /// Fecha: 2021-02-20
         /// </summary>
-        public int Count(Expression<Func<DepartmentAM, bool>> predicate)
+        public int Count(Expression<Func<ServicesAM, bool>> predicate)
         {
             try
             {
-                var where = mapper.MapExpression<Expression<Func<Department, bool>>>(predicate);
+                var where = mapper.MapExpression<Expression<Func<Services, bool>>>(predicate);
 
-                IRepository<Department> repo = new DepartmentRepo(context);
+                IRepository<Services> repo = new ServicesRepo(context);
                 return repo.Count(where);
             }
             catch (Exception ex)
@@ -91,18 +90,18 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener Sancion por Id
+        /// Obtener services por Id
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-08-06
+        /// Fecha: 2021-02-20
         /// </summary>
-        public DepartmentAM Get(long id)
+        public ServicesAM Get(long id)
         {
             try
             {
-                IRepository<Department> repo = new DepartmentRepo(context);
-                var sancion = repo.Get(id);
+                IRepository<Services> repo = new ServicesRepo(context);
+                var services = repo.Get(id);
 
-                return mapper.Map<DepartmentAM>(sancion);
+                return mapper.Map<ServicesAM>(services);
             }
             catch (Exception ex)
             {
@@ -111,18 +110,18 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener lista de Sancion
+        /// Obtener lista de services
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-08-06
+        /// Fecha: 2021-02-20
         /// </summary>
-        public List<DepartmentAM> Get()
+        public List<ServicesAM> Get()
         {
             try
             {
-                IRepository<Department> repo = new DepartmentRepo(context);
-                var sancion = repo.Get();
+                IRepository<Services> repo = new ServicesRepo(context);
+                var services = repo.Get();
 
-                return mapper.Map<List<DepartmentAM>>(sancion);
+                return mapper.Map<List<ServicesAM>>(services);
             }
             catch (Exception ex)
             {
@@ -131,20 +130,20 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener lista de Sancion
+        /// Obtener lista de services
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-08-06
+        /// Fecha: 2021-02-20
         /// </summary>
-        public List<DepartmentAM> Get(Expression<Func<DepartmentAM, bool>> predicate)
+        public List<ServicesAM> Get(Expression<Func<ServicesAM, bool>> predicate)
         {
             try
             {
-                var where = mapper.MapExpression<Expression<Func<Department, bool>>>(predicate);
+                var where = mapper.MapExpression<Expression<Func<Services, bool>>>(predicate);
 
-                IRepository<Department> repo = new DepartmentRepo(context);
-                var sancion = repo.Get(where);
+                IRepository<Services> repo = new ServicesRepo(context);
+                var services = repo.Get(where);
 
-                return mapper.Map<List<DepartmentAM>>(sancion);
+                return mapper.Map<List<ServicesAM>>(services);
             }
             catch (Exception ex)
             {
@@ -153,20 +152,20 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener primera Sancion según filtro
+        /// Obtener primera services según filtro
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-08-06
+        /// Fecha: 2021-02-20
         /// </summary>
-        public DepartmentAM GetFirst(Expression<Func<DepartmentAM, bool>> predicate)
+        public ServicesAM GetFirst(Expression<Func<ServicesAM, bool>> predicate)
         {
             try
             {
-                var where = mapper.MapExpression<Expression<Func<Department, bool>>>(predicate);
+                var where = mapper.MapExpression<Expression<Func<Services, bool>>>(predicate);
 
-                IRepository<Department> repo = new DepartmentRepo(context);
-                var sancion = repo.GetFirst(where);
+                IRepository<Services> repo = new ServicesRepo(context);
+                var services = repo.GetFirst(where);
 
-                return mapper.Map<DepartmentAM>(sancion);
+                return mapper.Map<ServicesAM>(services);
             }
             catch (Exception ex)
             {
@@ -175,18 +174,18 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Actualizar Sancion
+        /// Actualizar services
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-08-06
+        /// Fecha: 2021-02-20
         /// </summary>
-        public void Update(DepartmentAM entity)
+        public void Update(ServicesAM entity)
         {
             try
             {
-                var sancion = mapper.Map<Department>(entity);
+                var services = mapper.Map<Services>(entity);
 
-                IRepository<Department> repo = new DepartmentRepo(context);
-                repo.Update(sancion);
+                IRepository<Services> repo = new ServicesRepo(context);
+                repo.Update(services);
             }
             catch (Exception ex)
             {

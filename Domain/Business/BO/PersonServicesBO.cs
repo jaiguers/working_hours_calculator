@@ -10,16 +10,15 @@ using Domain.Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Domain.Business.BO
 {
-    public class DocumentTypeBO: IDocumentType
+    public class PersonServicesBO : IPersonServices
     {
         private readonly DomainContext context;
         private readonly IMapper mapper;
 
-        public DocumentTypeBO(DomainContext context)
+        public PersonServicesBO(DomainContext context)
         {
             this.context = context;
 
@@ -33,18 +32,18 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Crear registro de Sancion
+        /// Crear registro de PersonServices
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
-        public long Create(DocumentTypeAM entity)
+        public long Create(PersonServicesAM entity)
         {
             try
             {
-                var sancion = mapper.Map<DocumentType>(entity);
+                var PersonServices = mapper.Map<PersonServices>(entity);
 
-                IRepository<DocumentType> repo = new DocumentTypeRepo(context);
-                return repo.Create(sancion);
+                IRepository<PersonServices> repo = new PersonServicesRepo(context);
+                return repo.Create(PersonServices);
             }
             catch (Exception ex)
             {
@@ -53,15 +52,15 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener cantidad de registros de Sancion
+        /// Obtener cantidad de registros de PersonServices
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
         public int Count()
         {
             try
             {
-                IRepository<DocumentType> repo = new DocumentTypeRepo(context);
+                IRepository<PersonServices> repo = new PersonServicesRepo(context);
                 return repo.Count();
             }
             catch (Exception ex)
@@ -71,17 +70,17 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener cantidad de registros de Sancion según filtro
+        /// Obtener cantidad de registros de PersonServices según filtro
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
-        public int Count(Expression<Func<DocumentTypeAM, bool>> predicate)
+        public int Count(Expression<Func<PersonServicesAM, bool>> predicate)
         {
             try
             {
-                var where = mapper.MapExpression<Expression<Func<DocumentType, bool>>>(predicate);
+                var where = mapper.MapExpression<Expression<Func<PersonServices, bool>>>(predicate);
 
-                IRepository<DocumentType> repo = new DocumentTypeRepo(context);
+                IRepository<PersonServices> repo = new PersonServicesRepo(context);
                 return repo.Count(where);
             }
             catch (Exception ex)
@@ -91,18 +90,18 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener Sancion por Id
+        /// Obtener PersonServices por Id
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
-        public DocumentTypeAM Get(long id)
+        public PersonServicesAM Get(long id)
         {
             try
             {
-                IRepository<DocumentType> repo = new DocumentTypeRepo(context);
-                var sancion = repo.Get(id);
+                IRepository<PersonServices> repo = new PersonServicesRepo(context);
+                var PersonServices = repo.Get(id);
 
-                return mapper.Map<DocumentTypeAM>(sancion);
+                return mapper.Map<PersonServicesAM>(PersonServices);
             }
             catch (Exception ex)
             {
@@ -111,18 +110,18 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener lista de Sancion
+        /// Obtener lista de PersonServices
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
-        public List<DocumentTypeAM> Get()
+        public List<PersonServicesAM> Get()
         {
             try
             {
-                IRepository<DocumentType> repo = new DocumentTypeRepo(context);
-                var sancion = repo.Get();
+                IRepository<PersonServices> repo = new PersonServicesRepo(context);
+                var PersonServices = repo.Get();
 
-                return mapper.Map<List<DocumentTypeAM>>(sancion);
+                return mapper.Map<List<PersonServicesAM>>(PersonServices);
             }
             catch (Exception ex)
             {
@@ -131,20 +130,20 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener lista de Sancion
+        /// Obtener lista de PersonServices
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
-        public List<DocumentTypeAM> Get(Expression<Func<DocumentTypeAM, bool>> predicate)
+        public List<PersonServicesAM> Get(Expression<Func<PersonServicesAM, bool>> predicate)
         {
             try
             {
-                var where = mapper.MapExpression<Expression<Func<DocumentType, bool>>>(predicate);
+                var where = mapper.MapExpression<Expression<Func<PersonServices, bool>>>(predicate);
 
-                IRepository<DocumentType> repo = new DocumentTypeRepo(context);
-                var sancion = repo.Get(where);
+                IRepository<PersonServices> repo = new PersonServicesRepo(context);
+                var PersonServices = repo.Get(where);
 
-                return mapper.Map<List<DocumentTypeAM>>(sancion);
+                return mapper.Map<List<PersonServicesAM>>(PersonServices);
             }
             catch (Exception ex)
             {
@@ -153,20 +152,20 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Obtener primera Sancion según filtro
+        /// Obtener primera PersonServicess según filtro
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
-        public DocumentTypeAM GetFirst(Expression<Func<DocumentTypeAM, bool>> predicate)
+        public PersonServicesAM GetFirst(Expression<Func<PersonServicesAM, bool>> predicate)
         {
             try
             {
-                var where = mapper.MapExpression<Expression<Func<DocumentType, bool>>>(predicate);
+                var where = mapper.MapExpression<Expression<Func<PersonServices, bool>>>(predicate);
 
-                IRepository<DocumentType> repo = new DocumentTypeRepo(context);
-                var sancion = repo.GetFirst(where);
+                IRepository<PersonServices> repo = new PersonServicesRepo(context);
+                var PersonServices = repo.GetFirst(where);
 
-                return mapper.Map<DocumentTypeAM>(sancion);
+                return mapper.Map<PersonServicesAM>(PersonServices);
             }
             catch (Exception ex)
             {
@@ -175,18 +174,18 @@ namespace Domain.Business.BO
         }
 
         /// <summary>
-        /// Actualizar Sancion
+        /// Actualizar PersonServices
         /// Autor: Jair Guerrero
-        /// Fecha: 2020-12-05
+        /// Fecha: 2021-02-20
         /// </summary>
-        public void Update(DocumentTypeAM entity)
+        public void Update(PersonServicesAM entity)
         {
             try
             {
-                var sancion = mapper.Map<DocumentType>(entity);
+                var PersonServices = mapper.Map<PersonServices>(entity);
 
-                IRepository<DocumentType> repo = new DocumentTypeRepo(context);
-                repo.Update(sancion);
+                IRepository<PersonServices> repo = new PersonServicesRepo(context);
+                repo.Update(PersonServices);
             }
             catch (Exception ex)
             {
