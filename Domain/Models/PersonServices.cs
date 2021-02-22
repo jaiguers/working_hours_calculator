@@ -26,6 +26,9 @@ namespace Domain.Models
         [Column("Week_Number", TypeName = "int")]
         public int WeekNumber { get; set; }
 
+        [Column("Id_User", TypeName = "nvarchar(450)")]
+        public string IdUser { get; set; }
+
         [ForeignKey("IdServices")]
         public virtual Person Person { get; set; }
 

@@ -2,6 +2,7 @@
 using IASHandyMan.Areas.Admin.Controllers;
 using IASHandyMan.Areas.Identity.Models;
 using IASHandyMan.Controllers;
+using IASHandyMan.CrossCutting.ApplicationModel;
 using IASHandyMan.CrossCutting.Enumerators;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -34,6 +35,13 @@ namespace IASHandyMan.Areas.Technician.Controllers
         [HttpGet]
         [Authorize(Roles = RolesEnum.TECH)]
         public IActionResult RegisterHours()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = RolesEnum.TECH)]
+        public IActionResult RegisterHours(PersonServicesAM model)
         {
             return View();
         }

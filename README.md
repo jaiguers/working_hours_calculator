@@ -20,5 +20,5 @@ ___
 | Nombre | Descripción                   |
 | ------------- | ------------------------------ |
 | `Reportar servicio`      | El técnico reporta las horas en el servicio.       |
-| `Calcular horas`   | **Calculos de horas de trabajo por semana**     |
+| `Calcular horas`   | **Calculo de horas de trabajo por semana**     |
 

@@ -1,8 +1,24 @@
 ﻿$(document).ready(function () {
     //Date range picker with time picker
-    $('#reservationtime').daterangepicker({
+    $('#StarDate').daterangepicker({
         timePicker: true,
         timePickerIncrement: 30,
+        singleDatePicker: true,
+        showDropdowns: true,
+        minYear: 1901,
+        maxYear: parseInt(moment().format('YYYY'), 10),
+        locale: {
+            format: 'MM/DD/YYYY hh:mm A'
+        }
+    });
+
+    $('#EndDate').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        singleDatePicker: true,
+        showDropdowns: true,
+        minYear: 1901,
+        maxYear: parseInt(moment().format('YYYY'), 10),
         locale: {
             format: 'MM/DD/YYYY hh:mm A'
         }

@@ -1,7 +1,8 @@
-﻿
+﻿@model IASHandyMan.CrossCutting.ApplicationModel.PersonServicesAM
+
 @{
     Layout = "_Layout";
-    ViewData["Title"] = "Regitrar horas";
+    ViewData["Title"] = "Registrar horas";
 }
 
 <section class="content-header">
@@ -30,30 +31,40 @@
                 <div class="col-md-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Quick Example</h3>
+                            <h3 class="card-title">Atención a un servicio</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form role="form">
+                        <form role="form" asp-area="Technician" asp-controller="Technician" asp-action="RegisterHours" method="POST" enctype="multipart/form-data">
+                            @Html.ValidationSummary(false)
+
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                    @Html.LabelFor(m => m.Services.Identification)
+                                    @Html.TextBoxFor(m => m.Services.Identification, new { @class = "form-control", placeholder = "Identificación del servicio" })
+                                    @Html.ValidationMessageFor(m => m.Services.Identification)
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                </div>
-                                <!-- Date and time range -->
-                                <div class="form-group">
-                                    <label>Date and time range:</label>
-
+                                    @Html.LabelFor(m => m.StarDate)
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-clock"></i></span>
                                         </div>
-                                        <input type="text" class="form-control float-right" id="reservationtime">
+                                        @Html.TextBoxFor(m => m.StarDate, new { @class = "form-control float-right" })
+                                        @Html.ValidationMessageFor(m => m.StarDate)
                                     </div>
+                                </div>
+                                <!-- Date and time range -->
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.EndDate)
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                        </div>
+                                        @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control float-right" })
+
+                                    </div>
+                                    @Html.ValidationMessageFor(m => m.EndDate)
                                     <!-- /.input group -->
                                 </div>
                                 <!-- /.form group -->
@@ -61,7 +72,7 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
                             </div>
                         </form>
                     </div>
