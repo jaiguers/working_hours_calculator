@@ -35,14 +35,13 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form role="form" asp-area="Technician" asp-controller="Technician" asp-action="RegisterHours" method="POST" enctype="multipart/form-data">
-                            @Html.ValidationSummary(false)
+                        <form class="needs-validation" id="formHours" role="form" asp-area="Technician" asp-controller="Technician" asp-action="RegisterHours" method="POST" enctype="multipart/form-data">
 
                             <div class="card-body">
                                 <div class="form-group">
                                     @Html.LabelFor(m => m.Services.Identification)
                                     @Html.TextBoxFor(m => m.Services.Identification, new { @class = "form-control", placeholder = "Identificación del servicio" })
-                                    @Html.ValidationMessageFor(m => m.Services.Identification)
+                                    @Html.ValidationMessageFor(m => m.Services.Identification, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group">
                                     @Html.LabelFor(m => m.StarDate)
@@ -51,8 +50,8 @@
                                             <span class="input-group-text"><i class="far fa-clock"></i></span>
                                         </div>
                                         @Html.TextBoxFor(m => m.StarDate, new { @class = "form-control float-right" })
-                                        @Html.ValidationMessageFor(m => m.StarDate)
                                     </div>
+                                    @Html.ValidationMessageFor(m => m.StarDate, "", new { @class = "text-danger" })
                                 </div>
                                 <!-- Date and time range -->
                                 <div class="form-group">
@@ -64,7 +63,7 @@
                                         @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control float-right" })
 
                                     </div>
-                                    @Html.ValidationMessageFor(m => m.EndDate)
+                                    @Html.ValidationMessageFor(m => m.EndDate, "", new { @class = "text-danger" })
                                     <!-- /.input group -->
                                 </div>
                                 <!-- /.form group -->
@@ -72,7 +71,7 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="button" onclick="registerHours()" class="btn btn-primary">Guardar</button>
                             </div>
                         </form>
                     </div>

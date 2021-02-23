@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Http.Cors;
 using Domain.Business.BO;
 using Domain.Business.Interface;
 using Domain.Context;
 using IASHandyMan.Api.ApiModel;
 using IASHandyMan.CrossCutting.ApplicationModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -20,6 +22,7 @@ namespace IASHandyMan.Api.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class ReportController : ControllerBase
     {
         private readonly static string INTERNAL_ERROR = "Internal server error";
@@ -45,6 +48,7 @@ namespace IASHandyMan.Api.Controllers
         /// <returns>Json</returns>
         [HttpPost]
         [Route("[action]")]
+        [EnableCors(origins: "http://localhost:53585", headers: "*", methods: "*")]
         public IActionResult RegisterHours([FromBody] PersonServicesAM data)
         {
             try

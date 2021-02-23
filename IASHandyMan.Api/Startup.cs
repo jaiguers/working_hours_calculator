@@ -39,6 +39,8 @@ namespace IASHandyMan.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            
+            app.UseCors();
 
             app.UseAuthorization();
 

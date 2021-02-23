@@ -8,8 +8,11 @@
         minYear: 1901,
         maxYear: parseInt(moment().format('YYYY'), 10),
         locale: {
-            format: 'MM/DD/YYYY hh:mm A'
+            format: 'YYYY-MM-DD HH:mm'
         }
+    }, function (start, end, label) {
+        console.log('StarDate:');
+        console.log(start);
     });
 
     $('#EndDate').daterangepicker({
@@ -20,32 +23,48 @@
         minYear: 1901,
         maxYear: parseInt(moment().format('YYYY'), 10),
         locale: {
-            format: 'MM/DD/YYYY hh:mm A'
+            format: 'YYYY-MM-DD HH:mm'
         }
+    }, function (start, end, label) {
+        console.log('EndDate:');
+        console.log(start);
     });
 });
 
 function registerHours() {
 
-    $.ajax({
-        url: "/Reviews/Reviews/GetDocs",
-        data: { id: idDoc },
-        type: "GET",
-    }).done(function (result) {
+    if ($('#formHours').valid()) {
+        //SubmitFn('formHours');
+        var data = $('#formHours').serializeObject();
 
-        console.log(result);
+        $.ajax({
+            url: "http://localhost:57088/api/Report/RegisterHours",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json", 
+            data: { data },
+            type: "POST",
+        }).done(function (result) {
 
-        if (result.success) {
+            console.log(result);
+
+            if (result.success) {
 
 
-            // $('#pdfDisplay').modal();
-        }
-        else {
-            console.error("Error ver documentos");
-        }
+                // $('#pdfDisplay').modal();
+            }
+            else {
+                console.error("Error ver documentos");
+            }
 
-    }).fail(function (jqXHR, textStatus, errorThrown) {
-        console.error("Error en el servidor");
-    });
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.error("Error en el servidor");
+        });
+    }
+    else {
+        NotificaFn("error", "Por favor verifique los campos diligenciados.");
+    }
+
+    /**/
 
 }
+

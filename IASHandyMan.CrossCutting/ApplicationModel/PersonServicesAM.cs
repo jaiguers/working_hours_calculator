@@ -10,7 +10,6 @@ namespace IASHandyMan.CrossCutting.ApplicationModel
         [Required(ErrorMessage = "Campo requerido.")]
         [Display(Name = "Fecha y hora de inicio *")]
         public DateTime? StarDate { get; set; }
-
         [Required(ErrorMessage = "Campo requerido.")]
         [Display(Name = "Fecha y hora fin *")]
         public DateTime? EndDate { get; set; }

@@ -8,6 +8,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using System;
+using System.Globalization;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace IASHandyMan.Areas.Technician.Controllers
 {
@@ -41,8 +47,27 @@ namespace IASHandyMan.Areas.Technician.Controllers
 
         [HttpPost]
         [Authorize(Roles = RolesEnum.TECH)]
-        public IActionResult RegisterHours(PersonServicesAM model)
+        public async Task<IActionResult> RegisterHours(PersonServicesAM model)
         {
+            if (ModelState.IsValid)
+            {
+                int result = DateTime.Compare(model.EndDate.Value, model.StarDate.Value);
+
+                if (result < 0)
+                {
+                    ModelState.AddModelError("StarDate", "La fecha de inicio debe ser menor que la fecha de fin.");
+                    return View(model);
+                }
+
+                var apiClient = new HttpClient();
+                HttpContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                var response = await apiClient.PostAsync("http://localhost:57088/api/Report/RegisterHours", content);
+
+                if (response.IsSuccessStatusCode)
+                    CreateModal("exito", "Terminado", "Las horas se han registrado satisfactoriamente.", "Terminar", null, "Redirect('Index')", null);
+
+            }
+
             return View();
         }
     }
