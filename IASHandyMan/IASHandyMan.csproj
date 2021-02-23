@@ -35,6 +35,7 @@
     <Folder Include="Areas\Reviews\Data\" />
     <Folder Include="Areas\Technician\Data\" />
     <Folder Include="Data\Migrations\" />
+    <Folder Include="ScriptsBD\" />
     <Folder Include="wwwroot\pdf\" />
   </ItemGroup>
 
