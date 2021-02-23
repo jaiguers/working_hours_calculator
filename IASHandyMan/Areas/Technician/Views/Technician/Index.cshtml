@@ -1,4 +1,4 @@
-﻿
+﻿@model IASHandyMan.Areas.Technician.Models.PersonServicesVM
 
 @{
     Layout = "_Layout";
@@ -44,10 +44,22 @@
                                         <th>Servicio</th>
                                         <th>Fecha inicio</th>
                                         <th>Fecha fin</th>
-                                        <th>Horas</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @if (Model.PersonServiceList != null && Model.PersonServiceList.Count > 0)
+                                    {
+                                        foreach (var item in Model.PersonServiceList)
+                                        {
+                                            <tr>
+                                                <td>@(item.Person.Name + " "+item.Person.SurName)</td>
+                                                <td>@item.Person.Identification</td>
+                                                <td>@item.Services.Names</td>
+                                                <td>@item.StarDate</td>
+                                                <td>@item.EndDate</td>
+                                            </tr>
+                                        }
+                                    }
                                 </tbody>
                             </table>
                         </div>

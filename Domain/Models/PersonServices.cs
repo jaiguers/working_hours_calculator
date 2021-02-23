@@ -29,7 +29,7 @@ namespace Domain.Models
         [Column("Id_User", TypeName = "nvarchar(450)")]
         public string IdUser { get; set; }
 
-        [ForeignKey("IdServices")]
+        [ForeignKey("IdPerson")]
         public virtual Person Person { get; set; }
 
         [ForeignKey("IdServices")]

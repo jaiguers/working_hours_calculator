@@ -3,6 +3,7 @@ using Domain.Business.Interface;
 using Domain.Context;
 using IASHandyMan.Areas.Admin.Controllers;
 using IASHandyMan.Areas.Identity.Models;
+using IASHandyMan.Areas.Technician.Models;
 using IASHandyMan.Controllers;
 using IASHandyMan.CrossCutting.ApplicationModel;
 using IASHandyMan.CrossCutting.Enumerators;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
 using System.Text;
@@ -44,9 +46,22 @@ namespace IASHandyMan.Areas.Technician.Controllers
 
         [HttpGet]
         [Authorize(Roles = RolesEnum.TECH + "," + RolesEnum.ADMIN)]
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            return View();
+            var apiEndpoint = Configuration["ApiEndpoint"];
+            var apiClient = new HttpClient();
+            PersonServicesVM model = new PersonServicesVM();
+
+            var response = apiClient.GetAsync(apiEndpoint + "/api/Report/GetHours/" + AuthUser.Id).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var strJson = await response.Content.ReadAsStringAsync();
+                var deserialize = JsonConvert.DeserializeObject<IEnumerable<PersonServicesAM>>(strJson);
+                model.PersonServiceList = (List<PersonServicesAM>)deserialize;
+            }
+
+            return View(model);
         }
 
         [HttpGet]

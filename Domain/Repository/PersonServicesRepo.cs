@@ -1,6 +1,7 @@
 ﻿using Domain.Context;
 using Domain.Models;
 using Domain.Repository.Base;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +58,8 @@ namespace Domain.Repository
         {
             try
             {
-                return context.PersonServices.Where(j => j.Id == id).FirstOrDefault();
+                return context.PersonServices.Include(j => j.Services)
+                    .Include(j => j.Person).Where(j => j.Id == id).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -81,7 +83,8 @@ namespace Domain.Repository
         {
             try
             {
-                return context.PersonServices.Where(predicate).ToList();
+                return context.PersonServices.Include(j => j.Services)
+                    .Include(j => j.Person).Where(predicate).ToList();
             }
             catch (Exception ex)
             {

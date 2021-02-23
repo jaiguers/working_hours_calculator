@@ -68,6 +68,21 @@ namespace IASHandyMan.Api.Controllers
         }
 
         [HttpGet]
+        [Route("[action]/{id}")]
+        public IEnumerable<PersonServicesAM> GetHours(string id)
+        {
+            try
+            {
+                return pServiceBO.Get(j => j.IdUser == id);
+            }
+            catch (Exception e)
+            {
+                logger.LogInformation("Error: {mess}", e);
+                return null;
+            }
+        }
+
+        [HttpGet]
         [Route("[action]")]
         public IActionResult CalculateHours()
         {
