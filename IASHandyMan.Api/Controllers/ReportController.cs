@@ -82,25 +82,43 @@ namespace IASHandyMan.Api.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("[action]")]
-        public IActionResult CalculateHours()
+        public ReportAM CalculateHours([FromBody] RequestHoursAM data)
         {
             try
             {
+                ReportAM report = new ReportAM();
+                var workList = pServiceBO.Get(j => j.Person.Identification == data.Identification && j.WeekNumber == data.Week);
 
-                return StatusCode(StatusCodes.Status201Created, new JsonResponse { Status = StatusCodes.Status201Created, Title = SUCCESFULLY, TraceId = Guid.NewGuid().ToString() });
+                if (workList != null && workList.Count > 0)
+                {
+                    foreach (PersonServicesAM work in workList.Where(j => j.StarDate.Value.DayOfWeek != DayOfWeek.Sunday))
+                    {
+                        TimeSpan diff = (work.EndDate.Value - work.StarDate.Value);
+                        report.NormalHours += diff.TotalHours;
+                    }
+
+                    foreach (PersonServicesAM work in workList.Where(j => j.StarDate.Value.DayOfWeek == DayOfWeek.Sunday))
+                    {
+                        TimeSpan diff = (work.EndDate.Value - work.StarDate.Value);
+
+                        if (report.NormalHours < 48)
+                            report.SundayHours += diff.TotalHours;
+                        else
+                            report.SundayOvertime += diff.TotalHours;
+                    }
+
+                    return report;
+                }
+                else
+                    return new ReportAM();
+
             }
             catch (Exception e)
             {
                 logger.LogInformation("Error: {mess}", e);
-                return StatusCode(StatusCodes.Status500InternalServerError, new JsonResponse
-                {
-                    Status = StatusCodes.Status500InternalServerError,
-                    Title = INTERNAL_ERROR,
-                    Errors = new string[] { e.Message },
-                    TraceId = Guid.NewGuid().ToString()
-                });
+                return new ReportAM();
             }
         }
     }

@@ -1,19 +1,20 @@
-﻿
+﻿@model IASHandyMan.Areas.Reviews.Models.RequestHoursVM
+
 @{
     Layout = "_Layout";
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Calcular horas";
 }
 
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Lista de archivos</h1>
+                <h1>@ViewData["Title"]</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Lista de archivos</li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
                 </ol>
             </div>
         </div>
@@ -28,37 +29,32 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card">
+                    <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Documentos</h3>
+                            <h3 class="card-title">Reporte de horas calculadas</h3>
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Documento</th>
-                                        <th>Tipo documento</th>
-                                        <th>Fecha</th>
-                                        <th style="width: 40px">Estado</th>
-                                        <th style="width: 25%">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
-                        <div class="card-footer clearfix">
-                            <ul class="pagination pagination-sm m-0 float-right">
-                                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                            </ul>
-                        </div>
+                        <!-- form start -->
+                        <form class="needs-validation" id="formCal" role="form" asp-area="Reviews" asp-controller="Reviews" asp-action="Calculate" method="POST" enctype="multipart/form-data">
+
+                            <div class="card-body">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Identification)
+                                    @Html.TextBoxFor(m => m.Identification, new { @class = "form-control", placeholder = "Identificación del tecnico" })
+                                    @Html.ValidationMessageFor(m => m.Identification, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Week)
+                                    @Html.TextBoxFor(m => m.Week, new { @class = "form-control", placeholder = "Identificación del tecnico" })
+                                    @Html.ValidationMessageFor(m => m.Week, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+
+                            <div class="card-footer">
+                                <button type="button" onclick="calculateHours()" class="btn btn-primary">Calcular</button>
+                            </div>
+                        </form>
                     </div>
                     <!-- /.card -->
 
@@ -77,3 +73,4 @@
 @section Scripts{
     <script src="~/js/Reviews/reviews.js"></script>
 }
+
