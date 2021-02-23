@@ -20,6 +20,8 @@ namespace IASHandyMan.Controllers
         private readonly RoleManager<Role> roleManager;
         private readonly IRolMenu rolMenuBO;
 
+        public static Users AuthUser;
+
         public BaseController(UserManager<Users> userManag, RoleManager<Role> roleManag, DomainContext context)
         {
             userManager = userManag;
@@ -32,7 +34,7 @@ namespace IASHandyMan.Controllers
             if (HttpContext.Session.GetString("IdUsers") != null)
             {
                 Users user = userManager.Users.Include(x => x.Person).FirstOrDefault(u => u.Id == HttpContext.Session.GetString("IdUsers"));
-
+                AuthUser = user;
                 var rol = userManager.GetRolesAsync(user);
                 rol.Wait();
 

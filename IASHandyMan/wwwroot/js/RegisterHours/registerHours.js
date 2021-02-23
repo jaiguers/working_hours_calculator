@@ -34,37 +34,38 @@
 function registerHours() {
 
     if ($('#formHours').valid()) {
-        //SubmitFn('formHours');
-        var data = $('#formHours').serializeObject();
+        SubmitFn('formHours');
 
-        $.ajax({
-            url: "http://localhost:57088/api/Report/RegisterHours",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json", 
-            data: { data },
-            type: "POST",
-        }).done(function (result) {
+        /*
+          var data = $('#formHours').serializeObject();
+    
+            $.ajax({
+                url: "http://localhost:57088/api/Report/RegisterHours",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: { data },
+                type: "POST",
+            }).done(function (result) {
+    
+                console.log(result);
+    
+                if (result.success) {
+    
+    
+                    // $('#pdfDisplay').modal();
+                }
+                else {
+                    console.error("Error ver documentos");
+                }
+    
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                console.error("Error en el servidor");
+            });
+        }
+        else {
+            NotificaFn("error", "Por favor verifique los campos diligenciados.");
+        }
+         */
 
-            console.log(result);
-
-            if (result.success) {
-
-
-                // $('#pdfDisplay').modal();
-            }
-            else {
-                console.error("Error ver documentos");
-            }
-
-        }).fail(function (jqXHR, textStatus, errorThrown) {
-            console.error("Error en el servidor");
-        });
     }
-    else {
-        NotificaFn("error", "Por favor verifique los campos diligenciados.");
-    }
-
-    /**/
-
 }
-

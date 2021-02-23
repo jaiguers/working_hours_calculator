@@ -22,21 +22,19 @@ namespace IASHandyMan.Api.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    // [Authorize(AuthenticationSchemes = "Bearer")]
     public class ReportController : ControllerBase
     {
         private readonly static string INTERNAL_ERROR = "Internal server error";
         private readonly static string SUCCESFULLY = "Creado correctamente";
         private readonly ILogger<ReportController> logger;
         private readonly IPersonServices pServiceBO;
-        private readonly IServices servicesBO;
 
 
         public ReportController(DomainContext context, ILogger<ReportController> log)
         {
             logger = log;
             pServiceBO = new PersonServicesBO(context);
-            servicesBO = new ServicesBO(context);
         }
 
         /// <summary>
@@ -48,7 +46,6 @@ namespace IASHandyMan.Api.Controllers
         /// <returns>Json</returns>
         [HttpPost]
         [Route("[action]")]
-        [EnableCors(origins: "http://localhost:53585", headers: "*", methods: "*")]
         public IActionResult RegisterHours([FromBody] PersonServicesAM data)
         {
             try

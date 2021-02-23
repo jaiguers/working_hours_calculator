@@ -1,4 +1,6 @@
-﻿using Domain.Context;
+﻿using Domain.Business.BO;
+using Domain.Business.Interface;
+using Domain.Context;
 using IASHandyMan.Areas.Admin.Controllers;
 using IASHandyMan.Areas.Identity.Models;
 using IASHandyMan.Controllers;
@@ -7,6 +9,7 @@ using IASHandyMan.CrossCutting.Enumerators;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
@@ -23,12 +26,20 @@ namespace IASHandyMan.Areas.Technician.Controllers
         private readonly ILogger<UsersController> logger;
         private readonly UserManager<Users> userManager;
         private readonly RoleManager<Role> roleManager;
+        private readonly IServices servicesBO;
+        private readonly IPersonServices pServiceBO;
 
-        public TechnicianController(DomainContext context, ILogger<UsersController> log, UserManager<Users> userManag, RoleManager<Role> roleManag) : base(userManag, roleManag, context)
+        public IConfiguration Configuration { get; }
+
+
+        public TechnicianController(DomainContext context, ILogger<UsersController> log, UserManager<Users> userManag, RoleManager<Role> roleManag, IConfiguration configuration) : base(userManag, roleManag, context)
         {
             logger = log;
             userManager = userManag;
             roleManager = roleManag;
+            Configuration = configuration;
+            servicesBO = new ServicesBO(context);
+            pServiceBO = new PersonServicesBO(context);
         }
 
         [HttpGet]
@@ -51,6 +62,9 @@ namespace IASHandyMan.Areas.Technician.Controllers
         {
             if (ModelState.IsValid)
             {
+                var apiEndpoint = Configuration["ApiEndpoint"];
+                var apiClient = new HttpClient();
+
                 int result = DateTime.Compare(model.EndDate.Value, model.StarDate.Value);
 
                 if (result < 0)
@@ -59,9 +73,21 @@ namespace IASHandyMan.Areas.Technician.Controllers
                     return View(model);
                 }
 
-                var apiClient = new HttpClient();
+                var service = servicesBO.GetFirst(j => j.Identification == model.Services.Identification);
+
+                model.IdUser = AuthUser.Id;
+                model.IdPerson = AuthUser.IdPerson.Value;
+                model.IdServices = service.Id;
+                model.Services = null;
+
+                var currentCulture = CultureInfo.CurrentCulture;
+                model.WeekNumber = currentCulture.Calendar.GetWeekOfYear(
+                                model.StarDate.Value,
+                                currentCulture.DateTimeFormat.CalendarWeekRule,
+                                currentCulture.DateTimeFormat.FirstDayOfWeek);
+
                 HttpContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-                var response = await apiClient.PostAsync("http://localhost:57088/api/Report/RegisterHours", content);
+                var response = await apiClient.PostAsync(apiEndpoint + "/api/Report/RegisterHours", content);
 
                 if (response.IsSuccessStatusCode)
                     CreateModal("exito", "Terminado", "Las horas se han registrado satisfactoriamente.", "Terminar", null, "Redirect('Index')", null);
